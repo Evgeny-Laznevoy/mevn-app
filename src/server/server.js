@@ -7,8 +7,6 @@ mongoose.Schema.Types.Boolean.convertToFalse.add("");
 
 const app = express();
 
-// app.set("port", 3000);
-
 mongoose
   .connect("mongodb://localhost:27017/test", {
     useNewUrlParser: true,
@@ -28,6 +26,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(morgan("dev"));
 
 app.use("/api/records", require("./routes/records"));
+
+app.use('/', express.static(path.join(__dirname, '../dist')));
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`)

@@ -31,6 +31,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: "Thanks",
   data() {
@@ -42,8 +44,21 @@ export default {
     };
   },
   methods: {
-    sendData() {
+    async sendData() {
       console.log(this.name, this.email, this.address, this.gender);
+
+      console.log(
+        await axios({
+          baseURL: "http://localhost:8080/api/records",
+          method: "post",
+          data: {
+            name: this.name,
+            email: this.email,
+            address: this.address,
+            gender: this.gender,
+          },
+        })
+      );
     },
   },
 };
